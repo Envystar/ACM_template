@@ -1,12 +1,14 @@
 \documentclass{article}
 \usepackage[a4paper, landscape, top=1cm, bottom=1.5cm, left=1cm, right=1cm]{geometry} % 设置页边距
 \usepackage[fontset=none]{ctex}
+\usepackage{graphicx} 
 \usepackage{titlesec}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{fontspec}
 \usepackage{multicol}
-\usepackage{hyperref} 
+\usepackage{hyperref}
+\usepackage{colortbl}
 
 \hypersetup{
   colorlinks=true,
@@ -23,7 +25,7 @@
 \linespread{1.6}
 \setlength{\parskip}{0.5em}
 \setlength{\parindent}{0em}
-\setlength\columnsep{0.4cm} 
+\setlength\columnsep{0.8cm} 
 
 \titleformat{\section}
 {\zihao{-3}\Large\bfseries}
@@ -43,12 +45,12 @@
 
 \lstdefinestyle{cppstyle}{
     language=C++,
-    basicstyle=\ttfamily\tiny,
+    basicstyle=\ttfamily\footnotesize,
     breakatwhitespace=false,
     breaklines=true,
     keepspaces=true,
-    %numbers=left,
-    %numbersep=5pt,
+    numbers=left,
+    numbersep=5pt,
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
@@ -72,136 +74,258 @@
 }
 
 \begin{document}
-\begin{multicols*}{3}
+
+
+{\centering 
+    \includegraphics[width=0.9\textwidth]{img/HENU_LOGO.png}
+
+    \vspace*{40pt}
+    {\fontsize{64}{0}\selectfont {\setmainfont[LetterSpace=6]{Times New Roman}Unharmonized Series}}\\
+    \vspace*{40pt}
+    {\LARGE\bf{Contestant}}\\
+
+    \vspace*{30pt}
+
+    \setlength{\multicolsep}{0.5em}
+    \noindent{\makebox[\textwidth][c]{\begin{minipage}{0.5\textwidth}  
+        \begin{multicols}{3}  
+        \centering{\Large\bf{曹家宁}}\\
+        \centering{\Large\bf{罗施达}}\\
+        \centering{\Large\bf{赵炳凯}}\\
+        \end{multicols}  
+        \begin{multicols}{3}  
+        \centering{\Large\bf{Jianing Cao}}\\
+        \centering{\Large\bf{Shida Luo}}\\
+        \centering{\Large\bf{Bingkai Zhao}}\\
+        \end{multicols} 
+    \end{minipage}}}  
+}
+\thispagestyle{empty}    
+\newpage
+\begin{multicols*}{2}
 
 \thispagestyle{empty}
 \tableofcontents
 \newpage
 \setcounter{page}{1}
-\section{基础算法}
-\subsection{三分}
-\input{./src/1 基础算法/三分.tex}
-\lstinputlisting[style=cppstyle]{./src/1 基础算法/三分.cpp}
 \section{图论}
 \subsection{图的连通性}
 \subsubsection{Tarjan割点}
-\input{./src/2 图论/图的连通性/Tarjan割点.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/图的连通性/Tarjan割点.cpp}
+\begin{small}
+\input{./src/1 图论/图的连通性/Tarjan割点.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/图的连通性/Tarjan割点.cpp}
 \subsubsection{Tarjan割边}
-\input{./src/2 图论/图的连通性/Tarjan割边.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/图的连通性/Tarjan割边.cpp}
+\begin{small}
+\input{./src/1 图论/图的连通性/Tarjan割边.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/图的连通性/Tarjan割边.cpp}
 \subsubsection{Tarjan强连通分量}
-\input{./src/2 图论/图的连通性/Tarjan强连通分量.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/图的连通性/Tarjan强连通分量.cpp}
+\begin{small}
+\input{./src/1 图论/图的连通性/Tarjan强连通分量.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/图的连通性/Tarjan强连通分量.cpp}
 \subsubsection{Tarjan点双连通分量}
-\input{./src/2 图论/图的连通性/Tarjan点双连通分量.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/图的连通性/Tarjan点双连通分量.cpp}
+\begin{small}
+\input{./src/1 图论/图的连通性/Tarjan点双连通分量.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/图的连通性/Tarjan点双连通分量.cpp}
 \subsubsection{Tarjan边双连通分量}
-\input{./src/2 图论/图的连通性/Tarjan边双连通分量.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/图的连通性/Tarjan边双连通分量.cpp}
+\begin{small}
+\input{./src/1 图论/图的连通性/Tarjan边双连通分量.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/图的连通性/Tarjan边双连通分量.cpp}
 \subsection{拓扑排序}
-\input{./src/2 图论/拓扑排序.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/拓扑排序.cpp}
+\begin{small}
+\input{./src/1 图论/拓扑排序.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/拓扑排序.cpp}
 \subsection{最小生成树}
 \subsubsection{Kruskal}
-\input{./src/2 图论/最小生成树/Kruskal.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/最小生成树/Kruskal.cpp}
+\begin{small}
+\input{./src/1 图论/最小生成树/Kruskal.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/最小生成树/Kruskal.cpp}
 \subsubsection{Prim}
-\input{./src/2 图论/最小生成树/Prim.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/最小生成树/Prim.cpp}
+\begin{small}
+\input{./src/1 图论/最小生成树/Prim.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/最小生成树/Prim.cpp}
 \subsection{树的重心}
-\input{./src/2 图论/树的重心.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/树的重心.cpp}
+\begin{small}
+\input{./src/1 图论/树的重心.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/树的重心.cpp}
+\subsection{欧拉回路}
+\lstinputlisting[style=cppstyle]{./src/1 图论/欧拉回路.cpp}
 \subsection{流和匹配}
 \subsubsection{EdmondsKarp}
-\input{./src/2 图论/流和匹配/EdmondsKarp.tex}
-\lstinputlisting[style=cppstyle]{./src/2 图论/流和匹配/EdmondsKarp.cpp}
+\begin{small}
+\input{./src/1 图论/流和匹配/EdmondsKarp.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/流和匹配/EdmondsKarp.cpp}
+\subsubsection{二分图判定}
+\begin{small}
+\input{./src/1 图论/流和匹配/二分图判定.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/流和匹配/二分图判定.cpp}
+\subsubsection{二分图最大匹配}
+\begin{small}
+\input{./src/1 图论/流和匹配/二分图最大匹配.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/1 图论/流和匹配/二分图最大匹配.cpp}
 \section{数据结构}
 \subsection{Splay}
-\input{./src/3 数据结构/Splay.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/Splay.cpp}
+\begin{small}
+\input{./src/2 数据结构/Splay.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/Splay.cpp}
 \subsection{ST表}
-\input{./src/3 数据结构/ST表.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/ST表.cpp}
-\subsection{对顶堆}
-\input{./src/3 数据结构/对顶堆.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/对顶堆.cpp}
+\begin{small}
+\input{./src/2 数据结构/ST表.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/ST表.cpp}
+\subsection{带权并查集}
+\begin{small}
+\input{./src/2 数据结构/带权并查集.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/带权并查集.cpp}
 \subsection{并查集}
-\input{./src/3 数据结构/并查集.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/并查集.cpp}
+\begin{small}
+\input{./src/2 数据结构/并查集.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/并查集.cpp}
+\subsection{智慧集}
+\begin{small}
+\input{./src/2 数据结构/智慧集.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/智慧集.cpp}
 \subsection{树状数组}
 \subsubsection{树状数组}
-\input{./src/3 数据结构/树状数组/树状数组.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/树状数组/树状数组.cpp}
+\begin{small}
+\input{./src/2 数据结构/树状数组/树状数组.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/树状数组/树状数组.cpp}
 \subsubsection{树状数组2}
-\input{./src/3 数据结构/树状数组/树状数组2.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/树状数组/树状数组2.cpp}
+\begin{small}
+\input{./src/2 数据结构/树状数组/树状数组2.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/树状数组/树状数组2.cpp}
+\subsection{欧拉序}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/欧拉序.cpp}
 \subsection{波纹疾走树}
-\input{./src/3 数据结构/波纹疾走树.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/波纹疾走树.cpp}
+\begin{small}
+\input{./src/2 数据结构/波纹疾走树.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/波纹疾走树.cpp}
 \subsection{线段树}
 \subsubsection{主席树}
-\input{./src/3 数据结构/线段树/主席树.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/线段树/主席树.cpp}
+\begin{small}
+\input{./src/2 数据结构/线段树/主席树.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/线段树/主席树.cpp}
 \subsubsection{标记永久化主席树}
-\input{./src/3 数据结构/线段树/标记永久化主席树.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/线段树/标记永久化主席树.cpp}
+\begin{small}
+\input{./src/2 数据结构/线段树/标记永久化主席树.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/线段树/标记永久化主席树.cpp}
 \subsubsection{线段树}
-\input{./src/3 数据结构/线段树/线段树.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/线段树/线段树.cpp}
+\begin{small}
+\input{./src/2 数据结构/线段树/线段树.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/线段树/线段树.cpp}
 \subsubsection{线段树优化建图}
-\input{./src/3 数据结构/线段树/线段树优化建图.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/线段树/线段树优化建图.cpp}
+\begin{small}
+\input{./src/2 数据结构/线段树/线段树优化建图.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/线段树/线段树优化建图.cpp}
 \subsection{重链剖分}
-\input{./src/3 数据结构/重链剖分.tex}
-\lstinputlisting[style=cppstyle]{./src/3 数据结构/重链剖分.cpp}
+\begin{small}
+\input{./src/2 数据结构/重链剖分.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/重链剖分.cpp}
+\subsection{长链剖分}
+\lstinputlisting[style=cppstyle]{./src/2 数据结构/长链剖分.cpp}
 \section{数学}
 \subsection{数论}
 \subsubsection{MillerRabin}
-\input{./src/4 数学/数论/MillerRabin.tex}
-\lstinputlisting[style=cppstyle]{./src/4 数学/数论/MillerRabin.cpp}
+\begin{small}
+\input{./src/3 数学/数论/MillerRabin.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/3 数学/数论/MillerRabin.cpp}
 \subsubsection{PollardRho}
-\input{./src/4 数学/数论/PollardRho.tex}
-\lstinputlisting[style=cppstyle]{./src/4 数学/数论/PollardRho.cpp}
+\begin{small}
+\input{./src/3 数学/数论/PollardRho.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/3 数学/数论/PollardRho.cpp}
 \subsubsection{区间筛}
-\input{./src/4 数学/数论/区间筛.tex}
-\lstinputlisting[style=cppstyle]{./src/4 数学/数论/区间筛.cpp}
+\begin{small}
+\input{./src/3 数学/数论/区间筛.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/3 数学/数论/区间筛.cpp}
 \subsubsection{欧拉筛}
-\input{./src/4 数学/数论/欧拉筛.tex}
-\lstinputlisting[style=cppstyle]{./src/4 数学/数论/欧拉筛.cpp}
+\begin{small}
+\input{./src/3 数学/数论/欧拉筛.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/3 数学/数论/欧拉筛.cpp}
 \subsection{组合数学}
 \subsubsection{卢卡斯定理}
-\input{./src/4 数学/组合数学/卢卡斯定理.tex}
-\lstinputlisting[style=cppstyle]{./src/4 数学/组合数学/卢卡斯定理.cpp}
+\begin{small}
+\input{./src/3 数学/组合数学/卢卡斯定理.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/3 数学/组合数学/卢卡斯定理.cpp}
 \section{字符串}
 \subsection{EXKMP}
-\input{./src/5 字符串/EXKMP.tex}
-\lstinputlisting[style=cppstyle]{./src/5 字符串/EXKMP.cpp}
+\begin{small}
+\input{./src/4 字符串/EXKMP.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/4 字符串/EXKMP.cpp}
 \subsection{KMP}
-\input{./src/5 字符串/KMP.tex}
-\lstinputlisting[style=cppstyle]{./src/5 字符串/KMP.cpp}
+\begin{small}
+\input{./src/4 字符串/KMP.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/4 字符串/KMP.cpp}
 \subsection{字符串哈希}
-\input{./src/5 字符串/字符串哈希.tex}
-\lstinputlisting[style=cppstyle]{./src/5 字符串/字符串哈希.cpp}
+\begin{small}
+\input{./src/4 字符串/字符串哈希.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/4 字符串/字符串哈希.cpp}
 \subsection{马拉车}
-\input{./src/5 字符串/马拉车.tex}
-\lstinputlisting[style=cppstyle]{./src/5 字符串/马拉车.cpp}
+\begin{small}
+\input{./src/4 字符串/马拉车.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/4 字符串/马拉车.cpp}
 \section{计算几何}
 \subsection{凸包}
-\input{./src/6 计算几何/凸包.tex}
-\lstinputlisting[style=cppstyle]{./src/6 计算几何/凸包.cpp}
+\begin{small}
+\input{./src/5 计算几何/凸包.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/5 计算几何/凸包.cpp}
 \section{杂项}
 \subsection{康托展开}
-\input{./src/7 杂项/康托展开.tex}
-\lstinputlisting[style=cppstyle]{./src/7 杂项/康托展开.cpp}
+\begin{small}
+\input{./src/6 杂项/康托展开.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/6 杂项/康托展开.cpp}
 \subsection{逆康托展开}
-\input{./src/7 杂项/逆康托展开.tex}
-\lstinputlisting[style=cppstyle]{./src/7 杂项/逆康托展开.cpp}
+\begin{small}
+\input{./src/6 杂项/逆康托展开.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/6 杂项/逆康托展开.cpp}
 \subsection{高精度}
-\input{./src/7 杂项/高精度.tex}
-\lstinputlisting[style=cppstyle]{./src/7 杂项/高精度.cpp}
+\begin{small}
+\input{./src/6 杂项/高精度.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/6 杂项/高精度.cpp}
 \subsection{高维前缀和}
-\input{./src/7 杂项/高维前缀和.tex}
-\lstinputlisting[style=cppstyle]{./src/7 杂项/高维前缀和.cpp}
+\begin{small}
+\input{./src/6 杂项/高维前缀和.tex}
+\end{small}
+\lstinputlisting[style=cppstyle]{./src/6 杂项/高维前缀和.cpp}
+\subsection{命令行}
+\lstinputlisting[style=cppstyle]{./src/6 杂项/9 命令行.cpp}
+\begin{small}
+\input{./src/7 Addition.tex}
+\end{small}
 \end{multicols*}
 \end{document}

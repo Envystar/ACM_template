@@ -1,12 +1,14 @@
 \documentclass{article}
 \usepackage[a4paper, landscape, top=1cm, bottom=1.5cm, left=1cm, right=1cm]{geometry} % 设置页边距
 \usepackage[fontset=none]{ctex}
+\usepackage{graphicx} 
 \usepackage{titlesec}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{fontspec}
 \usepackage{multicol}
-\usepackage{hyperref} 
+\usepackage{hyperref}
+\usepackage{colortbl}  
 
 \hypersetup{
   colorlinks=true,
@@ -22,8 +24,8 @@
 
 \linespread{1.6}
 \setlength{\parskip}{0.5em}
-\setlength{\parindent}{2em}
-\setlength\columnsep{0.4cm} 
+\setlength{\parindent}{0em}
+\setlength\columnsep{0.8cm} 
 
 \titleformat{\section}
 {\zihao{-3}\Large\bfseries}
@@ -43,12 +45,12 @@
 
 \lstdefinestyle{cppstyle}{
     language=C++,
-    basicstyle=\ttfamily\tiny,
+    basicstyle=\ttfamily\footnotesize,
     breakatwhitespace=false,
     breaklines=true,
     keepspaces=true,
-    %numbers=left,
-    %numbersep=5pt,
+    numbers=left,
+    numbersep=5pt,
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
@@ -72,7 +74,35 @@
 }
 
 \begin{document}
-\begin{multicols*}{3}
+
+
+{\centering 
+    \includegraphics[width=0.9\textwidth]{img/HENU_LOGO.png}
+
+    \vspace*{40pt}
+    {\fontsize{64}{0}\selectfont {\setmainfont[LetterSpace=6]{Times New Roman}Unharmonized Series}}\\
+    \vspace*{40pt}
+    {\LARGE\bf{Contestant}}\\
+
+    \vspace*{30pt}
+
+    \setlength{\multicolsep}{0.5em}
+    \noindent{\makebox[\textwidth][c]{\begin{minipage}{0.5\textwidth}  
+        \begin{multicols}{3}  
+        \centering{\Large\bf{曹家宁}}\\
+        \centering{\Large\bf{罗施达}}\\
+        \centering{\Large\bf{赵炳凯}}\\
+        \end{multicols}  
+        \begin{multicols}{3}  
+        \centering{\Large\bf{Jianing Cao}}\\
+        \centering{\Large\bf{Shida Luo}}\\
+        \centering{\Large\bf{Bingkai Zhao}}\\
+        \end{multicols} 
+    \end{minipage}}}  
+}
+\thispagestyle{empty}    
+\newpage
+\begin{multicols*}{2}
 
 \thispagestyle{empty}
 \tableofcontents
