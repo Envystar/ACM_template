@@ -3,20 +3,26 @@
 //并查集(disjoint set union)
 //https://www.luogu.com.cn/problem/P3367
 struct DSU {
-    DSU(int n) { //初始构造
-        v.resize(n + 1);
-        std::iota(v.begin(), v.end(), 0);
+    DSU(int n) : p(n + 1), sz(n + 1, 1) { 
+        std::iota(p.begin(), p.end(), 0);
     }
-    int find(int x) { //找根
-        return (v[x] == x ? x : (v[x] = find(v[x])));
+    int find(int x) { 
+        return p[x] == x ? x : p[x] = find(p[x]);
     }
-    void merge(int x, int y) { //合并集合
-        v[find(x)] = find(y);
-    }
-    bool query(int x, int y) { //是否在同一集合
+    bool same(int x, int y) { 
         return find(x) == find(y);
     }
-    std::vector<int> v;
+    void merge(int x, int y) {
+        if (same(x, y)) return;
+        x = find(x), y = find(y);
+        if (sz[x] < sz[y]) std::swap(x, y);
+        sz[x] += sz[y];
+        p[y] = x;
+    }
+    int& size(int x) {
+        return sz[find(x)];
+    }
+    std::vector<int> p, sz;
 };
 
 int main() {
