@@ -3,7 +3,7 @@ using namespace std;
 typedef long long i64;
 
 struct SparseTable {
-    SparseTable() {}
+    SparseTable() = default;
     vector<int> v;
     vector<vector<int>> st;
     void init(vector<int> &v_) {
@@ -33,9 +33,8 @@ struct Euler_tours {
     int n, cnt = 0;
     vector<vector<int>> graph;
     vector<int> et_dep, id, et;
-    SparseTable st;
-    Euler_tours(int n) //节点个数，图
-        : n(n), graph(n + 1), id(n + 1), et_dep(2 * n), et(2 * n) {}
+    SparseTable st; //节点个数，图
+    Euler_tours(int n) : n(n), graph(n + 1), id(n + 1), et_dep(2 * n), et(2 * n) {}
 
     void add_edg(int u, int v) {
         graph[u].push_back(v);

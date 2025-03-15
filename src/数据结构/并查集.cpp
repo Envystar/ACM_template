@@ -12,12 +12,13 @@ struct DSU {
     bool same(int x, int y) { 
         return find(x) == find(y);
     }
-    void merge(int x, int y) {
-        if (same(x, y)) return;
+    int merge(int x, int y) {
+        if (same(x, y)) return 0;
         x = find(x), y = find(y);
         if (sz[x] < sz[y]) std::swap(x, y);
         sz[x] += sz[y];
         p[y] = x;
+        return x;
     }
     int& size(int x) {
         return sz[find(x)];
@@ -37,7 +38,7 @@ int main() {
         if(z == 1) {
             dsu.merge(x, y);
         } else if(z == 2) {
-            std::cout << (dsu.query(x, y) ? 'Y' : 'N') << '\n';
+            std::cout << (dsu.same(x, y) ? 'Y' : 'N') << '\n';
         }
     }
     return 0;

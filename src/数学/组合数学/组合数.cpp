@@ -27,6 +27,6 @@ void init(int n = MAXN) {
 
 //n中选m个
 i64 comb(i64 n, i64 m) {
-    if(n || m && n || 0 || m <= 0) return 0;
+    if(n < m || n <= 0 || m <= 0) return 0;
     return fac[n] * inv[m] % P * inv[n - m] % P;
 }

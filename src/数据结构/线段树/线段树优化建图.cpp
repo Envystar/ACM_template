@@ -33,7 +33,7 @@ struct STOG {
     }
     void rangeUpdate(int id, int l, int r, int pos, int x, int y, int w, auto model) {
         if(x <= l && r <= y) {
-            if(model == 0) {
+            if(model == 0) {h
                 update(pos, in[id], w);
             } else {
                 update(out[id], pos, w);

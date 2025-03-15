@@ -5,7 +5,7 @@ template<typename Info>
 struct SegmentTree {
 #define ls (id<<1)
 #define rs (id<<1|1)
-    SegmentTree(int n) : n(n), info(n << 2) {} //最值操作不可用此初始化
+    SegmentTree(int n) : n(n), info(n << 2) {}
     SegmentTree(const std::vector<Info> &init) : SegmentTree((int)init.size() - 1) {
         auto build = [&](auto self, int id, int l, int r) ->void {
             if(l == r) {
