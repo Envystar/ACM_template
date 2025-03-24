@@ -1,45 +1,51 @@
 #include <bits/stdc++.h>
 
-//树链剖分求LCA
-//https://www.luogu.com.cn/problem/P3379
-int main() {
-    std::ios::sync_with_stdio(0);
-    std::cin.tie(nullptr);
-    int n, m, s;
-    std::cin >> n >> m >> s;
-    std::vector<std::vector<int>> v(n + 1);
-    std::vector<int> fa(n + 1), dep(n + 1), son(n + 1), sz(n + 1), top(n + 1, 0);
-    //父节点，深度，重儿子，子树节点数，所在重链的顶点
-    for(int i = 0; i < n - 1; ++i) { 
-        int x, y;
-        std::cin >> x >> y;
-        v[x].push_back(y);
-        v[y].push_back(x);   
+struct HDL {
+    HDL(const int &_n) : n(_n), v(_n + 1) {
+        fa = dep = son = sz = top = in = out = rin = std::vector<int>(_n + 1);
     }
-    auto dfs1 = [&](auto self, int id, int lst) ->void {//求fa, dep, son, sz数组
+
+    void addEdge(const int &x, const int &y) {
+        v[x].push_back(y);
+        v[y].push_back(x);
+    }
+
+    void dfs1(int id, int lst, int &t) {
         fa[id] = lst;
-        dep[id] = dep[lst] + 1;
         sz[id] = 1;
-        for(auto nxt : v[id]) {
+        in[id] = t;
+        rin[t] = id;
+        for(const auto &nxt : v[id]) {
             if(nxt == lst) continue;
-            self(self, nxt, id);
+            dep[nxt] = dep[id] + 1;
+            dfs1(nxt, id, ++t);
             sz[id] += sz[nxt];
             if(sz[son[id]] < sz[nxt]) {
                 son[id] = nxt;
             }
         }
-    };
-    auto dfs2 = [&](auto self, int id, int t) ->void { 
+        out[id] = t;
+    }
+    void dfs2(int id, int t) {
         top[id] = t;
         if(son[id] == 0) return;
-        self(self, son[id], t);
-        for(auto nxt : v[id]) {
-            if(nxt != fa[id] && nxt != son[id]) {
-                self(self, nxt, nxt);
-            }
+        dfs2(son[id], t);
+        for(const auto &nxt : v[id]) {
+            if(nxt == fa[id] || nxt == son[id]) continue;
+            dfs2(nxt, nxt);
         }
-    };
-    auto lca = [&](int x, int y) ->int { 
+    }
+    void work(int root = 1) {
+        int dfsn = 1;
+        dfs1(root, 0, dfsn);
+        dfs2(root, root);
+    }
+
+    bool isAncestor(int x, int y) {
+        return in[x] <= in[y] && out[x] >= out[y];
+    }
+
+    int lca(int x, int y) {
         while(top[x] != top[y]) { 
             if(dep[top[x]] < dep[top[y]]) {
                 std::swap(x, y);
@@ -47,13 +53,45 @@ int main() {
             x = fa[top[x]];
         }
         return (dep[x] < dep[y] ? x : y);
-    };
-    dfs1(dfs1, s, 0);
-    dfs2(dfs2, s, s);
+    }
+
+    int dis(int x, int y) {
+        int a = lca(x, y);
+        return dep[x] - dep[a] + dep[y] - dep[a];
+    }
+
+    int kth(int id, int k) {
+        if(k > dep[id]) return 0;
+        while(dep[id] - dep[top[id]] + 1 <= k) {
+            k -= (dep[id] - dep[top[id]] + 1);
+            id = fa[top[id]];
+        }
+        return rin[in[id] - k];
+    }
+
+    std::vector<std::vector<int>> v;
+    std::vector<int> fa, dep, son, sz, top, in, out, rin;
+    int n;
+};
+
+//树链剖分求LCA
+//https://www.luogu.com.cn/problem/P3379
+int main() {
+    std::ios::sync_with_stdio(0);
+    std::cin.tie(nullptr);
+    int n, m, s;
+    std::cin >> n >> m >> s;
+    HDL tree(n);
+    for(int i = 0; i < n - 1; ++i) { 
+        int x, y;
+        std::cin >> x >> y;
+        tree.addEdge(x, y);
+    }
+    tree.work(s);
     for(int i = 0; i < m; ++i) {
         int x, y;
         std::cin >> x >> y;
-        std::cout << lca(x, y) << '\n';
+        std::cout << tree.lca(x, y) << '\n';
     }
     return 0;
 }

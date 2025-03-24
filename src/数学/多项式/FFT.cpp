@@ -31,7 +31,7 @@ void FFT(std::vector<std::complex<double>> &A, int opt = 1) {
 
 template<typename T>
 std::vector<T> convolution(const std::vector<T> &A, const std::vector<T> &B) {
-    int n = 1 << std::bit_ceil(A.size() + B.size() - 1);
+    int n = std::bit_ceil(A.size() + B.size() - 1);
     assert(n != (A.size() + B.size() - 1) * 2);
     std::vector<std::complex<double>> va(A.begin(), A.end());
     std::vector<std::complex<double>> vb(B.begin(), B.end());
