@@ -65,15 +65,15 @@ struct LDL {
         return in[x] <= in[y] && out[x] >= out[y];
     }
 
-        int lca(int x, int y) {
-            while(top[x] != top[y]) { 
-                if(dep[top[x]] < dep[top[y]]) {
-                    std::swap(x, y);
-                }
-                x = fa[0][top[x]];
+    int lca(int x, int y) {
+        while(top[x] != top[y]) { 
+            if(dep[top[x]] < dep[top[y]]) {
+                std::swap(x, y);
             }
-            return (dep[x] < dep[y] ? x : y);
+            x = fa[0][top[x]];
         }
+        return (dep[x] < dep[y] ? x : y);
+    }
 
     int dis(int x, int y) {
         int a = lca(x, y);

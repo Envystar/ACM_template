@@ -8,7 +8,7 @@
 \usepackage{fontspec}
 \usepackage{multicol}
 \usepackage{hyperref}
-\usepackage{colortbl}  
+\usepackage{colortbl}
 
 \hypersetup{
   colorlinks=true,
@@ -75,10 +75,8 @@
 
 \begin{document}
 
-
 {\centering 
     \includegraphics[width=0.9\textwidth]{img/HENU_LOGO.png}
-
     \vspace*{40pt}
     {\fontsize{64}{0}\selectfont {\setmainfont[LetterSpace=6]{Times New Roman}Unharmonized Series}}\\
     \vspace*{40pt}
@@ -99,12 +97,24 @@
         \centering{\Large\bf{Bingkai Zhao}}\\
         \end{multicols} 
     \end{minipage}}}  
+    \thispagestyle{empty}
+    \newpage
 }
-\thispagestyle{empty}    
-\newpage
-\begin{multicols*}{2}
-
-\thispagestyle{empty}
-\tableofcontents
-\newpage
 \setcounter{page}{1}
+
+\begin{multicols*}{2}
+    \pagestyle{empty}
+    \tableofcontents
+    \newpage
+    \setcounter{page}{1}
+\end{multicols*}
+
+\begin{multicols*}{2}
+% =====================split line======================================
+\begin{small}
+\tableofcontents
+\input{contents.tex}
+\end{small}
+% =====================split line======================================
+\end{multicols*}
+\end{document}
