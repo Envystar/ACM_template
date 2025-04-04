@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[a4paper, landscape, top=1cm, bottom=1.5cm, left=1cm, right=1cm]{geometry} % 设置页边距
+\usepackage[a4paper, landscape, top=1cm, bottom=2cm, left=1cm, right=1cm]{geometry} % 设置页边距
 \usepackage[fontset=none]{ctex}
 \usepackage{graphicx} 
 \usepackage{titlesec}
@@ -22,10 +22,14 @@
 \setCJKmainfont[AutoFakeBold={2.5}]{NSimSun} % 华文中宋
 \setmonofont{Fira Code}
 
-\linespread{1.6}
-\setlength{\parskip}{0.5em}
+\linespread{1.2}
+\setlength{\parskip}{0.2em}
 \setlength{\parindent}{0em}
 \setlength\columnsep{0.8cm} 
+
+\titlespacing*{\section}{0pt}{0.8ex}{0.5ex}
+\titlespacing*{\subsection}{0pt}{0.5ex}{0.3ex} 
+\titlespacing*{\subsubsection}{0pt}{0.2ex}{0.1ex} 
 
 \titleformat{\section}
 {\zihao{-3}\Large\bfseries}
@@ -60,7 +64,6 @@
     rulecolor=\color{black},
     commentstyle=\color{codecomment}\bfseries,
     stringstyle=\color{codestring}\bfseries,
-    morekeywords={},
     morekeywords={
         if, while, else, using, for, do, false, ture, nullptr, struct, class, 
         public, protected, private, const, constexpr, return, template, assert
@@ -70,7 +73,8 @@
         array, vector, list, map, set, unordered_map, unordered_set, stack, queue, priority_queue, pair, tuple, typename
     },
     keywordstyle=\color{codekeyword}\bfseries,
-    emphstyle=\color{codetype}\bfseries
+    emphstyle=\color{codetype}\bfseries,
+    belowskip=1em
 }
 
 \begin{document}
