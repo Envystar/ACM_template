@@ -35,7 +35,7 @@ bool Miller(i64 n) {
 i64 Pollard_rho(i64 n) {
     assert(n >= 2);
     if(n == 4) return 2;
-    static std::mt19937_64 rnd(std::chrono::steady_clock::now().time_since_epoch().count());
+    static std::mt19937_64 rnd  (std::chrono::steady_clock::now().time_since_epoch().count());
     std::uniform_int_distribution<int64_t> rangeRand(1, n - 1);
     i64 c = rangeRand(rnd);
     auto f = [&](i64 x) {

@@ -77,12 +77,42 @@
     belowskip=1em
 }
 
+\lstdefinestyle{pystyle}{
+    language=python,
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    backgroundcolor=\color{white},
+    rulecolor=\color{black},
+    commentstyle=\color{codecomment}\bfseries,
+    stringstyle=\color{codestring}\bfseries,
+    morekeywords={
+        if, while, else, using, for, do, false, ture, nullptr, struct, class, 
+        public, protected, private, const, constexpr, return, template, assert
+    },
+    emph={
+        int, char, float, double, bool, short, long, unsigned, signed, void, size_t, decltype, auto, int64_t, 
+        array, vector, list, map, set, unordered_map, unordered_set, stack, queue, priority_queue, pair, tuple, typename
+    },
+    keywordstyle=\color{codekeyword}\bfseries,
+    emphstyle=\color{codetype}\bfseries,
+    belowskip=1em
+}
+
 \begin{document}
 
 {\centering 
     \includegraphics[width=0.9\textwidth]{img/HENU_LOGO.png}
     \vspace*{40pt}
-    {\fontsize{64}{0}\selectfont {\setmainfont[LetterSpace=6]{Times New Roman}Unharmonized Series}}\\
+    {\fontsize{64}{0}\selectfont {\setmainfont[LetterSpace=6]{Times New Roman}Dissonant Interval}}\\
     \vspace*{40pt}
     {\LARGE\bf{Contestant}}\\
 
@@ -93,12 +123,12 @@
         \begin{multicols}{3}  
         \centering{\Large\bf{曹家宁}}\\
         \centering{\Large\bf{罗施达}}\\
-        \centering{\Large\bf{赵炳凯}}\\
+        \centering{\Large\bf{孙小文}}\\
         \end{multicols}  
         \begin{multicols}{3}  
         \centering{\Large\bf{Jianing Cao}}\\
         \centering{\Large\bf{Shida Luo}}\\
-        \centering{\Large\bf{Bingkai Zhao}}\\
+        \centering{\Large\bf{Xiaowen Sun}}\\
         \end{multicols} 
     \end{minipage}}}  
     \thispagestyle{empty}
@@ -116,7 +146,6 @@
 \begin{multicols*}{2}
 % =====================split line======================================
 \begin{small}
-\tableofcontents
 \input{contents.tex}
 \end{small}
 % =====================split line======================================

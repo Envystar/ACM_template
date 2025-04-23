@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
-struct HDL {
-    HDL(const int &_n) : n(_n), v(_n + 1) {
+struct HLD {
+    HLD(const int &_n) : n(_n), v(_n + 1) {
         fa = dep = son = sz = top = in = out = rin = std::vector<int>(_n + 1);
     }
 
@@ -10,15 +10,15 @@ struct HDL {
         v[y].push_back(x);
     }
 
-    void dfs1(int id, int lst, int &t) {
-        fa[id] = lst;
+    void dfs1(int id, int &t) {
         sz[id] = 1;
         in[id] = t;
         rin[t] = id;
         for(const auto &nxt : v[id]) {
-            if(nxt == lst) continue;
+            if(nxt == fa[id]) continue;
+            fa[nxt] = id;
             dep[nxt] = dep[id] + 1;
-            dfs1(nxt, id, ++t);
+            dfs1(nxt, ++t);
             sz[id] += sz[nxt];
             if(sz[son[id]] < sz[nxt]) {
                 son[id] = nxt;
@@ -37,7 +37,7 @@ struct HDL {
     }
     void work(int root = 1) {
         int dfsn = 1;
-        dfs1(root, 0, dfsn);
+        dfs1(root, dfsn);
         dfs2(root, root);
     }
 
@@ -56,8 +56,7 @@ struct HDL {
     }
 
     int dis(int x, int y) {
-        int a = lca(x, y);
-        return dep[x] - dep[a] + dep[y] - dep[a];
+        return dep[x] + dep[y] - dep[lca(x, y)];
     }
 
     int kth(int id, int k) {
@@ -81,7 +80,7 @@ int main() {
     std::cin.tie(nullptr);
     int n, m, s;
     std::cin >> n >> m >> s;
-    HDL tree(n);
+    HLD tree(n);
     for(int i = 0; i < n - 1; ++i) { 
         int x, y;
         std::cin >> x >> y;

@@ -2,7 +2,7 @@
 
 const std::string source_path = ".\\src";
 const std::string output_path = ".\\contents.tex";
-const std::string addtion_name = "Addition.tex";
+// const std::string addtion_name = "Addition.tex";
 
 int main() {
     freopen(output_path.c_str(), "w", stdout);

@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using i64 = long long;
 
-struct LDL {
-    LDL(const int &_n) : n(_n) {
+struct LLD {
+    LLD(const int &_n) : n(_n) {
         son = len = dep = top = in = out = lg = std::vector<int>(n + 1);
         v = up = down = std::vector<std::vector<int>>(n + 1);
         m = std::bit_width(std::bit_ceil((unsigned)n));
@@ -76,8 +76,7 @@ struct LDL {
     }
 
     int dis(int x, int y) {
-        int a = lca(x, y);
-        return dep[x] - dep[a] + dep[y] - dep[a];
+        return dep[x] + dep[y] - dep[lca(x, y)];
     }
 
     int kth(int id, int k) {
@@ -104,7 +103,7 @@ int main() {
     std::cin.tie(nullptr);
     int n, m, s;
     std::cin >> n >> m >> s;
-    LDL tree(n);
+    LLD tree(n);
     for(int i = 1; i <= n - 1; ++i) {
         int x, y;
         std::cin >> x >> y;

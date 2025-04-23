@@ -12,9 +12,9 @@ struct LeftistHeap {
     };
     LeftistHeap() = default;
     LeftistHeap(Comp _cmp) : cmp(std::move(_cmp)) {}
-    Node* merge(LeftistHeap &o) {
+    void merge(LeftistHeap &o) {
         _size += o.size();
-        return merge(root, o.root);
+        root = merge(root, o.root);
     }
     int dis(Node* &node) {
         return node == nullptr ? -1 : node->dis;
