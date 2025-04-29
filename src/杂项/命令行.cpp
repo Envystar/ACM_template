@@ -6,7 +6,7 @@ g++ %1.cpp -std=c++17 -o %1 -D_GLIBCXX_DEBUG
 *************************
 
 ********** sh *********** chmod +x
-#bin/bash
+#!bin/bash
 g++ -std=c++20 -O2 -Wall $1.cpp -o main
 ./main < in.txt > out.txt
 cat out.txt

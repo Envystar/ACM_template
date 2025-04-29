@@ -77,8 +77,8 @@
     belowskip=1em
 }
 
-\lstdefinestyle{pystyle}{
-    language=python,
+\lstdefinestyle{pystyle} {
+    language=Python,
     basicstyle=\ttfamily\footnotesize,
     breakatwhitespace=false,
     breaklines=true,
@@ -95,12 +95,12 @@
     commentstyle=\color{codecomment}\bfseries,
     stringstyle=\color{codestring}\bfseries,
     morekeywords={
-        if, while, else, using, for, do, false, ture, nullptr, struct, class, 
-        public, protected, private, const, constexpr, return, template, assert
+        def, class, if, else, elif, for, while, try, except, finally, import, from, as, with, lambda, return, yield,
+        True, False, None, and, or, not, is, in, global, nonlocal, assert
     },
     emph={
-        int, char, float, double, bool, short, long, unsigned, signed, void, size_t, decltype, auto, int64_t, 
-        array, vector, list, map, set, unordered_map, unordered_set, stack, queue, priority_queue, pair, tuple, typename
+        int, float, bool, str, list, dict, tuple, set, frozenset, range, bytes, bytearray, NoneType, complex,
+        object, Exception, BaseException, type, generator, function, method, coroutine
     },
     keywordstyle=\color{codekeyword}\bfseries,
     emphstyle=\color{codetype}\bfseries,
@@ -111,7 +111,7 @@
 
 {\centering 
     \includegraphics[width=0.9\textwidth]{img/HENU_LOGO.png}
-    \vspace*{40pt}
+    \vspace*{40pt}\\
     {\fontsize{64}{0}\selectfont {\setmainfont[LetterSpace=6]{Times New Roman}Dissonant Interval}}\\
     \vspace*{40pt}
     {\LARGE\bf{Contestant}}\\
