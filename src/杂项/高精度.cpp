@@ -135,7 +135,7 @@ struct Bigint {
     } 
     friend std::istream& operator>>(std::istream &is, Bigint &integer) {
         std::string input;
-        std::cin >> input;
+        is >> input;
         integer = input;
         return is;
     }

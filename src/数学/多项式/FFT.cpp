@@ -43,7 +43,7 @@ std::vector<T> convolution(const std::vector<T> &A, const std::vector<T> &B) {
     FFT(va, -1);
     std::vector<T> res(A.size() + B.size() - 1);
     for(int i = 0; i < res.size(); ++i) {
-        res[i] = (T)(va[i].real() / n + 0.5);
+        res[i] = (T)round(va[i].real() / n);
     }
     return res;
 }

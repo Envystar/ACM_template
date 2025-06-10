@@ -1,5 +1,6 @@
 \documentclass{article}
-\usepackage[a4paper, landscape, top=1cm, bottom=2cm, left=1cm, right=1cm]{geometry} % 设置页边距
+% \usepackage[a4paper, landscape, top=1cm, bottom=1cm, left=2cm, right=1cm]{geometry} % 设置页边距
+\usepackage[a4paper, landscape, twoside, top=1cm, bottom=1.5cm, inner=1cm, outer=2.5cm]{geometry}
 \usepackage[fontset=none]{ctex}
 \usepackage{graphicx} 
 \usepackage{titlesec}
@@ -17,6 +18,16 @@
   breaklinks=true,
   linktoc=all
 }
+
+\setcounter{secnumdepth}{4} % 允许编号到第4级
+\setcounter{tocdepth}{4}    % 在目录中显示到第4级
+
+\makeatletter
+\newcommand\subsubsubsection{\@startsection{paragraph}{4}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
 
 % 设置中文字体
 \setCJKmainfont[AutoFakeBold={2.5}]{NSimSun} % 华文中宋
@@ -70,7 +81,8 @@
     },
     emph={
         int, char, float, double, bool, short, long, unsigned, signed, void, size_t, decltype, auto, int64_t, 
-        array, vector, list, map, set, unordered_map, unordered_set, stack, queue, priority_queue, pair, tuple, typename
+        array, vector, list, map, set, unordered_map, unordered_set, stack, queue, priority_queue, pair, tuple, typename,
+        i32, i64, i128, u32, u64, u128
     },
     keywordstyle=\color{codekeyword}\bfseries,
     emphstyle=\color{codetype}\bfseries,

@@ -31,8 +31,7 @@ struct LeftistHeap {
         return x;
     }
     void push(const T &info) {
-        Node* new_node = new Node(info);
-        root = merge(root, new_node);
+        root = merge(root, new Node(info));
         ++_size;
     }
     void pop() {
@@ -60,6 +59,6 @@ int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
     
-
+    
     return 0;
 }
