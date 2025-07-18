@@ -30,7 +30,7 @@ void FFT(std::vector<std::complex<double>> &A, int opt = 1) {
 }
 
 template<typename T>
-std::vector<T> convolution(const std::vector<T> &A, const std::vector<T> &B) {
+std::vector<T> multiply(const std::vector<T> &A, const std::vector<T> &B) {
     int n = std::bit_ceil(A.size() + B.size() - 1);
     assert(n != (A.size() + B.size() - 1) * 2);
     std::vector<std::complex<double>> va(A.begin(), A.end());
@@ -48,6 +48,13 @@ std::vector<T> convolution(const std::vector<T> &A, const std::vector<T> &B) {
     return res;
 }
 
+template<typename T>
+std::vector<T> convolution(const std::vector<T> &A, std::vector<T> kernel) {
+    std::reverse(kernel.begin(), kernel.end());
+    auto res = multiply(A, kernel);
+    return std::vector(res.begin() + kernel.size() - 1, res.begin() + A.size());
+}
+
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
@@ -60,7 +67,7 @@ int main() {
     for(int i = 0; i <= m; ++i) {
         std::cin >> b[i];
     }
-    auto c = convolution(a, b);
+    auto c = multiply(a, b);
     for(int i = 0; i < c.size(); ++i) {
         std::cout << c[i] << " \n"[i + 1 == c.size()];
     }
