@@ -20,6 +20,17 @@ struct Fenwick {
     T range(int l, int r) {
         return query(r) - query(l - 1);
     }
+    T kth(T k) {
+        int pos = 0;
+        int logn = std::bit_width(v.size() - 1);
+        for(int i = 1 << (logn - 1); i > 0; i >>= 1) {
+            if(pos + i < v.size() && v[pos + i] < k) {
+                k -= v[pos + i];
+                pos += i;
+            }
+        }
+        return pos + 1;
+    }
     std::vector<T> v;
 };
 
