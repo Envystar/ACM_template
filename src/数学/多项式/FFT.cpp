@@ -32,18 +32,22 @@ void FFT(std::vector<std::complex<double>> &A, int opt = 1) {
 template<typename T>
 std::vector<T> multiply(const std::vector<T> &A, const std::vector<T> &B) {
     int n = std::bit_ceil(A.size() + B.size() - 1);
-    assert(n != (A.size() + B.size() - 1) * 2);
-    std::vector<std::complex<double>> va(A.begin(), A.end());
-    std::vector<std::complex<double>> vb(B.begin(), B.end());
-    va.resize(n), vb.resize(n);
-    FFT(va), FFT(vb);
-    for(int i = 0; i < n; ++i) {
-        va[i] *= vb[i];
+    std::vector<std::complex<double>> v(n);
+    for(int i = 0; i < A.size(); ++i) {
+        v[i].real(A[i]);
     }
-    FFT(va, -1);
+    for(int i = 0; i < B.size(); ++i) {
+        v[i].imag(B[i]);
+    }
+    v.resize(n);
+    FFT(v);
+    for(int i = 0; i < n; ++i) {
+        v[i] *= v[i];
+    }
+    FFT(v, -1);
     std::vector<T> res(A.size() + B.size() - 1);
     for(int i = 0; i < res.size(); ++i) {
-        res[i] = (T)round(va[i].real() / n);
+        res[i] = (T)round(v[i].imag() / 2 / n);
     }
     return res;
 }
