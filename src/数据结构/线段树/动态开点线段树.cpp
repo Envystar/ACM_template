@@ -9,7 +9,8 @@ struct SegmentTree {
         Node* r = nullptr;
         Info info;
     };
-    SegmentTree(T n) : L(0), R(n) {}
+    SegmentTree() = default;
+    SegmentTree(T n) : L(0), R(n - 1) {}
     SegmentTree(T L, T R) : L(L), R(R) {}
     void pushup(Node* id) {
         id->info = (id->l == nullptr ? Info() : id->l->info) 
@@ -138,7 +139,7 @@ int main() {
     std::cin.tie(nullptr);
     int n, m, idx = 1;
     std::cin >> n >> m;
-    std::vector<SegmentTree<Info>> segs(n + 1, SegmentTree<Info>(MAXN));
+    std::vector<SegmentTree<Info>> segs(n + 1, SegmentTree<Info>(MAXN + 1));
     for(int i = 1; i <= n; ++i) {
         int x;
         std::cin >> x;

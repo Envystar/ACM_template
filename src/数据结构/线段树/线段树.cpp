@@ -7,8 +7,12 @@ template<typename Info, typename Tag>
 struct SegmentTree {
 #define ls (id<<1)
 #define rs (id<<1|1)
-    SegmentTree(const std::vector<Info> &init) : SegmentTree((int)init.size() - 1) {
+    SegmentTree() = default;
+    SegmentTree(int n) : n(n), info(n << 2), tag(n << 2), len(n << 2) {}
+    SegmentTree(const SegmentTree<Info, Tag> &o) : n(o.n), info(o.info), tag(o.tag) {}
+    SegmentTree(const std::vector<Info> &init) : SegmentTree((int)init.size()) {
         auto build = [&](auto self, int id, int l, int r) ->void {
+            len[id] = r - l + 1;
             if(l == r) {
                 info[id] = init[l];
                 return;
@@ -18,10 +22,10 @@ struct SegmentTree {
             self(self, rs, mid + 1, r);
             pushup(id);
         };
-        build(build, 1, 1, n);
+        build(build, 1, 0, n - 1);
     }
     void apply(int id, const Tag &dx) {
-        info[id].apply(dx);
+        info[id].apply(dx, len[id]);
         tag[id].apply(dx);
     }
     void pushup(int id) {
@@ -33,16 +37,16 @@ struct SegmentTree {
         tag[id] = Tag();
     }
     void rangeUpdate(int l, int r, const Tag &dx) {
-        rangeUpdate(1, 1, n, l, r, dx);
+        rangeUpdate(1, 0, n - 1, l, r, dx);
     }
-    void update(int t, const Tag &dx) {
-        rangeUpdate(t, t, dx);
+    void update(int pos, const Tag &dx) {
+        rangeUpdate(pos, pos, dx);
     }
     Info rangeQuery(int l, int r) {
-        return rangeQuery(1, 1, n, l, r);
+        return rangeQuery(1, 0, n - 1, l, r);
     }
-    Info query(int t) {
-        return rangeQuery(t, t);
+    Info query(int pos) {
+        return rangeQuery(pos, pos);
     }
     void rangeUpdate(int id, int l, int r, int x, int y, const Tag &dx) {
         if(x <= l && r <= y) {
@@ -76,38 +80,34 @@ struct SegmentTree {
     }
 #undef ls
 #undef rs
-    const int n;
+    int n;
     std::vector<Info> info;
     std::vector<Tag> tag;
+    std::vector<int> len;
 };
 
-constexpr i64 INF = 1E18;
+constexpr i64 INF = 4E18;
+i64 P = 571373;
 
 struct Tag {
     i64 add = 0;
+    i64 mul = 1;
     void apply(const Tag &dx) {
-        add += dx.add;
+        mul = (mul * dx.mul) % P;
+        add = (add * dx.mul + dx.add) % P;
     }
 };
 
 struct Info {
-    i64 mn = INF;
-    i64 mx = -INF;
     i64 sum = 0;
-    i64 len = 1;
-    void apply(const Tag &dx) {
-        mn += dx.add;
-        mx += dx.add;
-        sum += len * dx.add;
+    void apply(const Tag &dx, const int &len) {
+        sum = (sum * dx.mul + dx.add * len) % P;
     }
 };
 
 Info operator+(const Info &x, const Info &y) {
     Info res;
-    res.mn = std::min(x.mn, y.mn);
-    res.mx = std::max(x.mx, y.mx);
-    res.sum = x.sum + y.sum;
-    res.len = x.len + y.len;
+    res.sum = (x.sum + y.sum) % P;
     return res;
 }
 
@@ -115,28 +115,26 @@ int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
     int n, m;
-    std::cin >> n >> m;
+    std::cin >> n >> m >> P;
     std::vector<Info> v(n + 1);
     for(int i = 1; i <= n; ++i) {
-        int x;
+        i64 x;
         std::cin >> x;
-        v[i] = {x, x, x, 1};
+        v[i] = {x % P};
     }
     SegmentTree<Info, Tag> tr(v);
-    // SegmentTree<Info, Tag> tr(n);
-    // for(int i = 1; i <= n; ++i) {
-    //     int x;
-    //     std::cin >> x;
-    //     tr.update(i, Tag(x));
-    // }
     while(m--) {
-        int opt, x, y;
+        i64 opt, x, y;
         std::cin >> opt >> x >> y;
         if(opt == 1) {
-            int k;
+            i64 k;
             std::cin >> k;
-            tr.rangeUpdate(x, y, Tag(k));
+            tr.rangeUpdate(x, y, Tag(0, k));
         } else if(opt == 2) {
+            i64 k;
+            std::cin >> k;
+            tr.rangeUpdate(x, y, Tag(k, 1));
+        } else if(opt == 3) {
             std::cout << tr.rangeQuery(x, y).sum << '\n';
         }
     }

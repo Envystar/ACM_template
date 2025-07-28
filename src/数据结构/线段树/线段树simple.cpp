@@ -5,8 +5,10 @@ template<typename Info>
 struct SegmentTree {
 #define ls (id<<1)
 #define rs (id<<1|1)
+    SegmentTree() = default;
     SegmentTree(int n) : n(n), info(n << 2) {}
-    SegmentTree(const std::vector<Info> &init) : SegmentTree((int)init.size() - 1) {
+    SegmentTree(const SegmentTree<Info> &o) : n(o.n), info(o.info) {}
+    SegmentTree(const std::vector<Info> &init) : SegmentTree((int)init.size()) {
         auto build = [&](auto self, int id, int l, int r) ->void {
             if(l == r) {
                 info[id] = init[l];
@@ -17,19 +19,19 @@ struct SegmentTree {
             self(self, rs, mid + 1, r);
             pushup(id);
         };
-        build(build, 1, 1, n);
+        build(build, 1, 0, n - 1);
     }
     void pushup(int id) {
         info[id] = info[ls] + info[rs];
     }
     void update(int pos, const Info &val) {
-        update(1, 1, n, pos, val);
+        update(1, 0, n - 1, pos, val);
     }
     Info query(int pos) {
         return rangeQuery(pos, pos);
     }
     Info rangeQuery(int l, int r) {
-        return rangeQuery(1, 1, n, l, r);
+        return rangeQuery(1, 0, n - 1, l, r);
     }
     void update(int id, int l, int r, int pos, const Info &val) {
         if(l == r) {
@@ -60,7 +62,7 @@ struct SegmentTree {
     }
 #undef ls
 #undef rs
-    const int n;
+    int n;
     std::vector<Info> info;
 };
 
