@@ -56,7 +56,7 @@ struct HLD {
     }
 
     int dis(int x, int y) {
-        return dep[x] + dep[y] - dep[lca(x, y)];
+        return dep[x] + dep[y] - 2 * dep[lca(x, y)];
     }
 
     int kth(int id, int k) {
