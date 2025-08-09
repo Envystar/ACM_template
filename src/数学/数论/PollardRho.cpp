@@ -34,51 +34,49 @@ bool Miller(i64 n) {
 //Pollard_rho找因子
 i64 Pollard_rho(i64 n) {
     assert(n >= 2);
-    if(n == 4) return 2;
-    static std::mt19937_64 rnd  (std::chrono::steady_clock::now().time_since_epoch().count());
-    std::uniform_int_distribution<int64_t> rangeRand(1, n - 1);
-    i64 c = rangeRand(rnd);
+    if (!(n & 1)) return 2;
     auto f = [&](i64 x) {
-        return ((__int128)x * x + c) % n;
+        return (__int128)x * x % n + 5;
     };
-    i64 x = f(0), y = f(x);
-    while(x != y) {
-        i64 gd = std::gcd(std::abs(x - y), n);
-        if(gd != 1) return gd;
+    i64 x = 0, y = 0, prod = 1;
+    for (int i = 30, z = 0; i % 64 || std::gcd(prod, n) == 1; ++i) {
+        if (x == y) {
+            x = ++z;
+            y = f(x);
+        }
+        i64 q = (__int128)prod * (x + n - y) % n;
+        if (q) prod = q;
         x = f(x), y = f(f(y));
     }
-    return n;
+    return std::gcd(prod, n);
+}
+
+std::vector<i64> factorize(i64 x) {
+    std::vector<i64> res;
+    auto f = [&](auto f, i64 x) ->void {
+        if (x == 1) return;
+        if (Miller(x)) {
+            res.push_back(x);
+            return;
+        }
+        i64 y = Pollard_rho(x);
+        f(f, y), f(f, x / y);
+    };
+    f(f, x);
+    std::ranges::sort(res);
+    return res;
 }
 
 void solve() {
     i64 x;
     std::cin >> x;
-    i64 res = 0;
-    auto max_factor = [&](auto self, i64 x) ->void {
-        if(x <= res || x < 2) return;
-        if(Miller(x)) {
-            res = std::max(res, x);
-            return;
-        }
-        i64 p = x;
-        while(p == x) {
-            p = Pollard_rho(x);
-        }
-        while(x % p == 0) {
-            x /= p;
-        }
-        self(self, x), self(self, p);
-    };
-    max_factor(max_factor, x);
-    if(res == x) {
-        std::cout << "Prime\n";
-    } else {
-        std::cout << res << '\n';
+    auto res = factorize(x);
+    std::cout << res.size() << " \n"[res.empty()];
+    for(int i = 0; i < res.size(); ++i) {
+        std::cout << res[i] << " \n"[i + 1 == res.size()];
     }
 }
 
-//Pollard_rho快速求大数因子
-//https://www.luogu.com.cn/problem/P4718
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);

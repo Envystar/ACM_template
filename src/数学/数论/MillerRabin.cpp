@@ -14,8 +14,7 @@ i64 qpow(i64 a, i64 b, i64 p) {
 }
 
 bool Minller(i64 n) {
-    if(n == 2) return true;
-    if(n <= 1 || n % 2 == 0) return false;
+    if(n <= 1 || n % 2 == 0) return (n == 2);
     i64 u = n - 1, k = 0;
     while(u % 2 == 0) u /= 2, ++k;
     static std::vector<i64> base = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
@@ -37,8 +36,6 @@ void solve() {
     std::cout << (Minller(x) ? "YES" : "NO") << '\n';
 }
 
-//Miller_rabin素数测验
-//https://www.luogu.com.cn/problem/SP288
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
