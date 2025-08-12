@@ -1,41 +1,54 @@
 #include <bits/stdc++.h>
 
+template<int N = 26>
 struct Trie {
-    Trie() : v(1) {};
+    Trie() = default;
+    Trie(const std::string &rgx) : tree(1) {
+        int k = 0;
+        for(int i = 0; i < rgx.size(); ++i) {
+            if(i + 2 < rgx.size() && rgx[i + 1] == '-') {
+                for(int j = rgx[i]; j <= rgx[i + 2]; ++j) {
+                    dict[j] = k++;
+                }
+                i += 2;
+            } else {
+                dict[rgx[i]] = k++; 
+            }
+        }
+    }
     void insert(const std::string &s) {
         int cur = 0;
-        for(const auto &val : s) {
-            if(v[cur][val - '0'] == 0) {
-                v[cur][val - '0'] = ++idx;
-            }
-            cur = v[cur][val - '0'];
-            if(v.size() <= cur) {
-                v.resize(cur + 1);
-                tot.resize(cur + 1);
+        for(const auto &ch : s) {
+            int &nxt = tree[cur][dict[ch]];
+            if(nxt == 0) nxt = ++idx;
+            cur = nxt;
+            if(tree.size() <= cur) {
+                tree.resize(cur + s.size());
+                tot.resize(cur + s.size());
             }
             tot[cur]++;
         }
     }
     int find(const std::string &s) {
         int cur = 0;
-        for(const auto &val : s) {
-            if(v.size() <= cur || v[cur][val - '0'] == 0) {
-                return 0;
-            }
-            cur = v[cur][val - '0'];
+        for(const auto &ch : s) {
+            int &nxt = tree[cur][dict[ch]];
+            if(nxt == 0) return 0;
+            cur = nxt;
         }
         return tot[cur];
     }
-    constexpr static int N = 80;
+
     int idx = 0;
     std::vector<int> tot;
-    std::vector<std::array<int, N>> v;
+    std::array<int, 128> dict{};
+    std::vector<std::array<int, N>> tree;
 };
 
 void solve() {
     int n, q;
     std::cin >> n >> q;
-    Trie t;
+    Trie<62> t("0-9A-Za-z");
     for(int i = 1; i <= n; ++i) {
         std::string s;
         std::cin >> s;
@@ -48,15 +61,13 @@ void solve() {
     }
 }
 
-
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
-    int T;
+    int T = 1;
     std::cin >> T;
     while(T--) {
         solve();
     }
-
     return 0;
-} 
+}
