@@ -3,13 +3,14 @@
 //并查集(disjoint set union)
 //https://www.luogu.com.cn/problem/P3367
 struct DSU {
-    DSU(int n) : p(n + 1), sz(n + 1, 1) { 
+    DSU() = default;
+    DSU(int n) : p(n), sz(n, 1) { 
         std::iota(p.begin(), p.end(), 0);
     }
     int find(int x) { 
         return p[x] == x ? x : p[x] = find(p[x]);
     }
-    bool same(int x, int y) { 
+    bool same(int x, int y) {
         return find(x) == find(y);
     }
     int merge(int x, int y) {

@@ -2,7 +2,8 @@
 using i64 = long long;
 
 struct DSUT {
-    DSUT(int n) : fa(n + 1), f(n + 1), sz(n + 1, 1) { 
+    DSUT() = default;
+    DSUT(int n) : fa(n), f(n), sz(n, 1) { 
         std::iota(fa.begin(), fa.end(), 0);
     }
     int find(int id) {

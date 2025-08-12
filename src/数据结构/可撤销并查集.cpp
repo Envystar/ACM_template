@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 
 struct RDSU {
-    RDSU(int n) : p(n + 1), sz(n + 1, 1) { 
+    RDSU() = default;
+    RDSU(int n) : p(n), sz(n, 1) { 
         std::iota(p.begin(), p.end(), 0);
     }
     int find(int x) {

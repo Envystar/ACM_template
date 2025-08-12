@@ -9,7 +9,6 @@ struct SegmentTree {
 #define rs (id<<1|1)
     SegmentTree() = default;
     SegmentTree(int n) : n(n), info(n << 2), tag(n << 2), len(n << 2) {}
-    SegmentTree(const SegmentTree<Info, Tag> &o) : n(o.n), info(o.info), tag(o.tag) {}
     SegmentTree(const std::vector<Info> &init) : SegmentTree((int)init.size()) {
         auto build = [&](auto self, int id, int l, int r) ->void {
             len[id] = r - l + 1;
