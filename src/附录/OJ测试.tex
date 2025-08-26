@@ -1,0 +1,25 @@
+\begin{lstlisting}[style=cppstyle]
+#include <bits/stdc++.h>
+using i64 = long long;
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    volatile unsigned j = 1;
+    for(unsigned i = 1; i <= (unsigned)65E7; i++) {
+        j = 0;
+        j += i;
+        j *= i;
+        j /= i;
+    }
+    return 0;
+}
+\end{lstlisting}
+\begin{center}
+    \begin{tabular}{|r|r|r|r|r|r|}  
+        \hline
+        \rowcolor{gray!20}
+        Local       & QOJ       & AtCoder   & LuoGu     & Codeforces    & Nowcoder  \\ \hline  
+        1000ms      & 1090ms    & 1120ms    & 1572ms    & 1718ms        & 18070ms   \\ \hline 
+    \end{tabular}\\
+\end{center}
