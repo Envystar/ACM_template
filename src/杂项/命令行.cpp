@@ -1,4 +1,4 @@
-********** bat ***********
+********** bat **********
 @echo off
 g++ %1.cpp -std=c++20 -O2 -Wall -o %1 -D_GLIBCXX_DEBUG
 .\%1 < in.txt > out.txt
@@ -24,4 +24,20 @@ while true; do
     break
     fi
 done
+*************************
+
+********** bat **********
+@echo off
+:loop
+    gen.exe > 1.in
+    std.exe < 1.in > std.out
+    my.exe < 1.in > my.out
+    fc my.out std.out > nul
+    if %errorlevel%==0 (
+        echo ac
+        goto loop
+    ) else (
+        echo wa
+        goto :eof
+    )
 *************************
