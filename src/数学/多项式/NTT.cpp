@@ -43,22 +43,21 @@ void NTT(std::vector<i64> &A, int opt = 1) {
     }
 }
 
-std::vector<i64> multiply(const std::vector<i64> &A, const std::vector<i64> &B) {
-    int n = std::bit_ceil(A.size() + B.size() - 1);
-    std::vector<i64> va(A.begin(), A.end());
-    std::vector<i64> vb(B.begin(), B.end());
-    va.resize(n), vb.resize(n);
-    NTT(va), NTT(vb);
+std::vector<i64> multiply(std::vector<i64> A, std::vector<i64> B) {
+    auto k = A.size() + B.size() - 1;
+    int n = std::bit_ceil(k);
+    A.resize(n), B.resize(n);
+    NTT(A), NTT(B);
     for (int i = 0; i < n; ++i) {
-        va[i] = va[i] * vb[i] % P;
+        A[i] = A[i] * B[i] % P;
     }
-    NTT(va, -1);
+    NTT(A, -1);
     i64 invn = qpow(n, P - 2);
-    va.resize(A.size() + B.size() - 1);
-    for (auto &x : va) {
+    A.resize(k);
+    for (auto &x : A) {
         x = x * invn % P;
     }
-    return va;
+    return A;
 }
 
 int main() {
