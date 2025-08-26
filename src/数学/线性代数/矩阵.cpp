@@ -48,11 +48,6 @@ struct Matrix {
         }
         return res;
     }
-    Matrix<T> operator=(const Matrix<T> &o) {
-        n = o.n, m = o.m;
-        mt = o.mt;
-        return *this;
-    }
     static Matrix<T> eye(int n) {
         Matrix<T> res(n, n);
         for(int i = 0; i < n; ++i) {
