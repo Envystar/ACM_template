@@ -1,8 +1,2 @@
 .gitignore
-*.exe
-*.aux
-*.log
-*.out
-*.synctex.gz
-*.toc
-./Algorithms&Data_Structures
+src/*.exe
