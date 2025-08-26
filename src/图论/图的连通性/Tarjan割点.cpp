@@ -15,7 +15,7 @@ int main() {
         v[x].push_back(y);
         v[y].push_back(x);
     }
-    std::vector<int> dfn(n + 1), low(n + 1), bel(n + 1), cutPoint(n + 1);
+    std::vector<int> dfn(n + 1), low(n + 1), cutPoint(n + 1);
     int cnt = 0, root = 0;
     auto dfs = [&](auto self, int id, int lst) ->void {
         dfn[id] = low[id] = ++cnt;
@@ -32,7 +32,7 @@ int main() {
                 low[id] = std::min(low[id], dfn[nxt]);
             }
         }
-        if(num <= 1 && id == root) {
+        if(sz <= 1 && id == root) {
             cutPoint[id] = 0;
         }
     };

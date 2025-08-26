@@ -22,10 +22,10 @@ int main() {
     auto dfs = [&](auto self, int id, int lst) ->void {
         dfn[id] = low[id] = ++cnt;
         stk.push(id);
-        int num = 0;
+        int sz = 0;
         for(auto nxt : v[id]) {
             if(!dfn[nxt]) {
-                num++;
+                sz++;
                 self(self, nxt, id);
                 low[id] = std::min(low[id], low[nxt]);
                 if(low[nxt] >= dfn[id]) {
@@ -42,7 +42,7 @@ int main() {
                 low[id] = std::min(low[id], dfn[nxt]);
             }
         }
-        if(lst == 0 && num == 0) {
+        if(lst == 0 && sz == 0) {
             ++tot;
             vcc[tot].push_back(id);
         }
