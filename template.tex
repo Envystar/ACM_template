@@ -1,6 +1,6 @@
 \documentclass{article}
-\usepackage[a4paper, landscape, top=1cm, bottom=1cm, left=2cm, right=1cm]{geometry} % 设置页边距
-% \usepackage[a4paper, landscape, twoside, top=1cm, bottom=1.5cm, inner=1cm, outer=2.5cm]{geometry}
+\usepackage[a4paper, landscape, top=1cm, bottom=1.5cm, left=1cm, right=1cm]{geometry} %预览版
+% \usepackage[a4paper, landscape, twoside, top=1cm, bottom=1.5cm, inner=1cm, outer=2.5cm]{geometry} %打印版，方便横向翻页
 \usepackage[fontset=none]{ctex}
 \usepackage{graphicx} 
 \usepackage{titlesec}
@@ -10,6 +10,7 @@
 \usepackage{multicol}
 \usepackage{hyperref}
 \usepackage{colortbl}
+\usepackage{grffile}
 
 \hypersetup{
   colorlinks=true,
@@ -23,9 +24,9 @@
 \setcounter{tocdepth}{4}    % 在目录中显示到第4级
 
 \makeatletter
-\newcommand\subsubsubsection{\@startsection{paragraph}{4}{\z@}%
-  {-3.25ex\@plus -1ex \@minus -.2ex}%
-  {1.5ex \@plus .2ex}%
+\newcommand\subsubsubsection{\@startsection{paragraph}{4}{\z@}
+  {-3.25ex\@plus -1ex \@minus -.2ex}
+  {1.5ex \@plus .2ex}
   {\normalfont\normalsize\bfseries}}
 \makeatother
 
@@ -121,6 +122,7 @@
 
 \begin{document}
 
+% ===================== 封面 ======================================
 {\centering 
     \includegraphics[width=0.9\textwidth]{img/HENU_LOGO.png}
     \vspace*{40pt}\\
@@ -143,9 +145,11 @@
         \centering{\Large\bf{Xiaowen Sun}}\\
         \end{multicols} 
     \end{minipage}}}  
-    \thispagestyle{empty}
-    \newpage
 }
+% ===================== 封面 ======================================
+
+\thispagestyle{empty}
+\newpage
 \setcounter{page}{1}
 
 \begin{multicols*}{2}
@@ -156,10 +160,10 @@
 \end{multicols*}
 
 \begin{multicols*}{2}
-% =====================split line======================================
+% ===================== 插入代码 ======================================
 \begin{small}
 \input{contents.tex}
 \end{small}
-% =====================split line======================================
+% ===================== 插入代码 ======================================
 \end{multicols*}
 \end{document}
