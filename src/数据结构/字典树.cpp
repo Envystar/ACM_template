@@ -5,14 +5,10 @@ struct Trie {
     Trie() = default;
     Trie(const std::string &rgx) : tree(1) {
         int k = 0;
-        for(int i = 0; i < rgx.size(); ++i) {
-            if(i + 2 < rgx.size() && rgx[i + 1] == '-') {
-                for(int j = rgx[i]; j <= rgx[i + 2]; ++j) {
-                    dict[j] = k++;
-                }
-                i += 2;
-            } else {
-                dict[rgx[i]] = k++; 
+        for(int i = 0, dx; i < rgx.size(); i += dx + 1) {
+            dx = 2 * (i + 2 < rgx.size() && rgx[i + 1] == '-');
+            for(int j = rgx[i]; j <= rgx[i + dx]; ++j) {
+                dict[j] = k++;
             }
         }
     }
