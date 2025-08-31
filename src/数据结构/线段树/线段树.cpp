@@ -8,8 +8,9 @@ struct SegmentTree {
 #define ls (id<<1)
 #define rs (id<<1|1)
     SegmentTree() = default;
-    SegmentTree(int n) : n(n), info(n << 2), tag(n << 2), len(n << 2) {}
-    SegmentTree(const std::vector<Info> &init) : SegmentTree((int)init.size()) {
+    SegmentTree(int n) : SegmentTree(std::vector<Info>(n)) {}
+    SegmentTree(int n, const Info &val) : SegmentTree(std::vector<Info>(n, val)) {}
+    SegmentTree(const std::vector<Info> &init) : n(init.size()), info(n << 2), tag(n << 2), len(n << 2) {
         auto build = [&](auto self, int id, int l, int r) ->void {
             len[id] = r - l + 1;
             if(l == r) {
@@ -68,7 +69,7 @@ struct SegmentTree {
         }
         int mid = (l + r) / 2;
         pushdown(id);
-        Info res;
+        Info res = Info::unit();
         if(x <= mid) {
             res = res + rangeQuery(ls, l, mid, x, y);
         }
@@ -76,6 +77,27 @@ struct SegmentTree {
             res = res + rangeQuery(rs, mid + 1, r, x, y);
         }
         return res;
+    }
+    int findFirst(int x, int y, auto check) {
+        Info pre = Info::unit();
+        return findFirst(1, 0, n - 1, x, y, pre, check);
+    }
+    int findFirst(int id, int l, int r, int x, int y, Info& pre, auto check) {
+        if(x <= l && r <= y) {
+            if(!check(pre + info[id])) {
+                pre = pre + info[id];
+                return -1;
+            } else if(l == r) {
+                return l;
+            }
+        }
+        int mid = (l + r) / 2;
+        pushdown(id);
+        if(x <= mid) {
+            int res = findFirst(ls, l, mid, x, y, pre, check);
+            if(res != -1) return res;
+        }
+        return findFirst(rs, mid + 1, r, x, y, pre, check);
     }
 #undef ls
 #undef rs
@@ -98,9 +120,14 @@ struct Tag {
 };
 
 struct Info {
+    Info() = default;
+    Info(i64 x) : sum(x % P) {}
     i64 sum = 0;
     void apply(const Tag &dx, const int &len) {
         sum = (sum * dx.mul + dx.add * len) % P;
+    }
+    static Info unit() {
+        return Info();
     }
 };
 
@@ -115,16 +142,17 @@ int main() {
     std::cin.tie(nullptr);
     int n, m;
     std::cin >> n >> m >> P;
-    std::vector<Info> v(n + 1);
-    for(int i = 1; i <= n; ++i) {
+    std::vector<Info> v(n);
+    for(int i = 0; i < n; ++i) {
         i64 x;
         std::cin >> x;
-        v[i] = {x % P};
+        v[i] = x;
     }
     SegmentTree<Info, Tag> tr(v);
     while(m--) {
         i64 opt, x, y;
         std::cin >> opt >> x >> y;
+        x--, y--;
         if(opt == 1) {
             i64 k;
             std::cin >> k;
