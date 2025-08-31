@@ -16,7 +16,7 @@ void solve() {
     auto dfs = [&](auto self, int id, int lst) ->void {
         sz[id] = 1;
         for(auto nxt : v[id]) {
-            if(nxt == lst) continue;    
+            if(nxt == lst) continue;
             self(self, nxt, id);
             weight[id] = std::max(weight[id], sz[nxt]);
             sz[id] += sz[nxt];

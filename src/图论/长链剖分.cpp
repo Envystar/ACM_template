@@ -25,7 +25,7 @@ struct LLD {
         len[id] = 1;
         for(const auto &nxt : v[id]) {
             if(nxt == fa[0][id]) continue;
-            fa[0][nxt] = id; 
+            fa[0][nxt] = id;
             dep[nxt] = dep[id] + 1;
             dfs1(nxt, ++t);
             if(len[nxt] + 1 > len[id]) {
@@ -60,13 +60,13 @@ struct LLD {
             }
         }
     }
-    
+
     bool isAncestor(int x, int y) { //x是y的祖先
         return in[x] <= in[y] && out[x] >= out[y];
     }
 
     int lca(int x, int y) {
-        while(top[x] != top[y]) { 
+        while(top[x] != top[y]) {
             if(dep[top[x]] < dep[top[y]]) {
                 std::swap(x, y);
             }

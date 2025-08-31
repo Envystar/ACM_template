@@ -26,7 +26,7 @@ std::array<int, 3> idToDate(i64 id) { // 通过 dayId 反向获取日期
     while (dayId(y, 1, 1) > id) y--;
     while (dayId(y + 1, 1, 1) <= id) y++;
     int m = (id - dayId(y, 1, 1)) * 1000 / 30419 + 1;
-    while (dayId(y, m, 1) > id) m--; 
+    while (dayId(y, m, 1) > id) m--;
     while (dayId(y, m + 1, 1) <= id) m++;
     int d = id - dayId(y, m, 1) + 1;
     return {y, m, d};
@@ -35,6 +35,6 @@ std::array<int, 3> idToDate(i64 id) { // 通过 dayId 反向获取日期
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
-    
+
     return 0;
 }

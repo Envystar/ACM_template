@@ -8,7 +8,7 @@ i64 qpow(i64 a, i64 b, i64 p) {
             res = (__int128)res * a % p;
         }
         a = (__int128)a * a % p;
-        b >>= 1; 
+        b >>= 1;
     }
     return res;
 }

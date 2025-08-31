@@ -9,7 +9,7 @@ struct Matrix {
         for(int i = 0; i < n; ++i) {
             assert(v[i].size() == m);
             for(int j = 0; j < m; ++j) {
-                mt[i][j] = v[i][j]; 
+                mt[i][j] = v[i][j];
             }
         }
     }
@@ -26,7 +26,7 @@ struct Matrix {
         return res;
     }
     Matrix<T> operator*=(const Matrix<T> &o) {
-        return *this = *this * o; 
+        return *this = *this * o;
     }
     Matrix<T> operator+(const Matrix<T> &o) {
         assert(n == o.n && m == o.m);

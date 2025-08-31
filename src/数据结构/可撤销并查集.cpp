@@ -2,14 +2,14 @@
 
 struct RDSU {
     RDSU() = default;
-    RDSU(int n) : p(n), sz(n, 1) { 
+    RDSU(int n) : p(n), sz(n, 1) {
         std::iota(p.begin(), p.end(), 0);
     }
     int find(int x) {
         while(p[x] != x) x = p[x];
         return x;
     }
-    bool same(int x, int y) { 
+    bool same(int x, int y) {
         return find(x) == find(y);
     }
     int merge(int x, int y) {
@@ -65,4 +65,4 @@ int main() {
        }
    }
    return 0;
-} 
+}

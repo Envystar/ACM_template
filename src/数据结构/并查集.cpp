@@ -4,10 +4,10 @@
 //https://www.luogu.com.cn/problem/P3367
 struct DSU {
     DSU() = default;
-    DSU(int n) : p(n), sz(n, 1) { 
+    DSU(int n) : p(n), sz(n, 1) {
         std::iota(p.begin(), p.end(), 0);
     }
-    int find(int x) { 
+    int find(int x) {
         return p[x] == x ? x : p[x] = find(p[x]);
     }
     bool same(int x, int y) {
@@ -43,4 +43,4 @@ int main() {
         }
     }
     return 0;
-} 
+}

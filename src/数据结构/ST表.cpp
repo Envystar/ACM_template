@@ -4,8 +4,8 @@ using i64 = long long;
 template <typename T, typename Func = std::function<T(const T&, const T&)>>
 struct ST {
     ST() = default;
-    ST(const std::vector<T> &v, Func func = [](const T& a, const T& b) {  
-        return std::max(a, b);  
+    ST(const std::vector<T> &v, Func func = [](const T& a, const T& b) {
+        return std::max(a, b);
     }) : func(std::move(func)) {
         int k = std::__lg(v.size());
         st = std::vector<std::vector<T>>(k + 1, std::vector<T>(v.size()));

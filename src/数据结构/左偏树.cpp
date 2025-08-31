@@ -4,14 +4,14 @@ using i64 = long long;
 template<typename T, typename _Compare = std::less<T>>
 struct LeftistHeap {
     struct Node {
-        Node(const T &_info) : info(_info){} 
+        Node(const T &_info) : info(_info){}
         T info;
         int dis = -1;
         Node *ls = nullptr;
         Node *rs = nullptr;
     };
     LeftistHeap() = default;
-    LeftistHeap(Comp _cmp) : cmp(std::move(_cmp)) {}
+    LeftistHeap(_Compare _cmp) : cmp(std::move(_cmp)) {}
     void merge(LeftistHeap &o) {
         _size += o.size();
         root = merge(root, o.root);
@@ -58,7 +58,5 @@ struct LeftistHeap {
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
-    
-    
     return 0;
 }

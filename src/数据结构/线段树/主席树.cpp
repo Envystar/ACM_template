@@ -19,9 +19,9 @@ struct PersistentTree {
             if(l == r) {
                 node[id].info = init[l];
             } else {
-                int mid = (l + r) / 2; 
-                ls(id) = self(self, l, mid);  
-                rs(id) = self(self, mid + 1, r);  
+                int mid = (l + r) / 2;
+                ls(id) = self(self, l, mid);
+                rs(id) = self(self, mid + 1, r);
                 node[id].info = node[ls(id)].info + node[rs(id)].info;
             }
             return id;
@@ -109,6 +109,7 @@ struct PersistentTree {
 };
 
 struct Tag {
+    Tag() = default;
     Tag(int dx = 0) : add(dx) {}
     int add = 0;
     void apply(const Tag &dx) {

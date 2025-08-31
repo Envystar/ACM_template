@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using i64 = long long;
 
-constexpr int MAXN = 2E5; 
+constexpr int MAXN = 2E5;
 std::vector<int> prime;
 std::vector<bool> nonPrime(MAXN + 1);
 void findPrime(int n) {
@@ -38,7 +38,7 @@ int main() {
             }
         }
 
-        i64 mn = INT_MAX, mx = INT_MIN; 
+        i64 mn = INT_MAX, mx = INT_MIN;
         int mnidx = -1, mxidx = -1;
         for(int i = 1; i < res.size(); ++i) {
             if(res[i] - res[i - 1] < mn) {
@@ -53,7 +53,7 @@ int main() {
         if(res.size() <= 1) {
             std::cout << "There are no adjacent primes.\n";
         } else {
-            std::cout << res[mnidx - 1] << ',' << res[mnidx] << " are closest, " 
+            std::cout << res[mnidx - 1] << ',' << res[mnidx] << " are closest, "
                       << res[mxidx - 1] << ',' << res[mxidx] << " are most distant.\n";
         }
     }

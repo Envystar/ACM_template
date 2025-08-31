@@ -2,7 +2,7 @@
 using i64 = long long;
 
 struct BipartiteGraph {
-    BipartiteGraph(int n, int m) 
+    BipartiteGraph(int n, int m)
     : n(n), m(m), g(n + 1), vis(m + 1), mch(m + 1) {};
     void add(int x, int y) {
         g[x].push_back(y);
@@ -13,12 +13,12 @@ struct BipartiteGraph {
                 vis[nxt] = 1;
                 if(!mch[nxt] || dfs(mch[nxt])) {
                     mch[nxt] = id;
-                    return true; 
+                    return true;
                 }
             }
         }
         return false;
-    } 
+    }
     int solve() { //求最大匹配
         int res = 0;
         for(int i = 1; i <= n; ++i) {

@@ -43,13 +43,13 @@ struct MaxFolw {
                 edge[pre[id]].cap -= mf[t];
                 edge[pre[id] ^ 1].cap += mf[t];
             }
-            flow += mf[t]; 
+            flow += mf[t];
         }
         return flow;
     }
     std::vector<Edge> edge;
     std::vector<int> head, pre; // pre: id的前驱边
-    std::vector<T> mf; //每S~v的流量上限, 
+    std::vector<T> mf; //每S~v的流量上限,
     const T INF = INT_MAX;
 };
 

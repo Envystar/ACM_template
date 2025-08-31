@@ -14,7 +14,7 @@ i64 EXCRT(std::vector<std::pair<i64, i64>> &v) {
     for(int i = 1; i < v.size(); ++i) {
         auto [m, r] = v[i];
         auto [gd, x, y] = exgcd(M, m);
-        i64 dx = ((ans - r) % m + m) % m; 
+        i64 dx = ((ans - r) % m + m) % m;
         if(dx % gd != 0) return -1;
         i64 k = m / gd;
         x = __int128(dx / gd) % k * x % k;

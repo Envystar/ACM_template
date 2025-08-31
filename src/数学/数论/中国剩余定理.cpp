@@ -18,7 +18,7 @@ i64 CRT(std::vector<std::pair<i64, i64>> &v) {
     for(const auto &[m, r] : v) {
         i64 Mi = M / m;
         auto [gd, x, y] = exgcd(Mi, m);
-        ans += (__int128)r * Mi % M * x % M; 
+        ans += (__int128)r * Mi % M * x % M;
     }
     return (ans % M + M) % M;
 }

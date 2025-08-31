@@ -46,7 +46,7 @@ struct HLD {
     }
 
     int lca(int x, int y) {
-        while(top[x] != top[y]) { 
+        while(top[x] != top[y]) {
             if(dep[top[x]] < dep[top[y]]) {
                 std::swap(x, y);
             }
@@ -81,7 +81,7 @@ int main() {
     int n, m, s;
     std::cin >> n >> m >> s;
     HLD tree(n);
-    for(int i = 0; i < n - 1; ++i) { 
+    for(int i = 0; i < n - 1; ++i) {
         int x, y;
         std::cin >> x >> y;
         tree.addEdge(x, y);

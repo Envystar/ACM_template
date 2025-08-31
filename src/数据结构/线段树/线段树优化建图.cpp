@@ -13,7 +13,7 @@ struct STOG {
             }
             int mid = (l + r) / 2;
             self(self, ls, l, mid);
-            self(self, rs, mid + 1, r); 
+            self(self, rs, mid + 1, r);
             in[id] = ++tot;
             out[id] = ++tot;
             update(in[id], in[ls], 0);

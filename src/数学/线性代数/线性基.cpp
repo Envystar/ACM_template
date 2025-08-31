@@ -2,7 +2,7 @@
 using i64 = long long;
 
 template<typename T, int N = std::numeric_limits<T>::digits>
-struct Basis {  
+struct Basis {
     bool insert(T x) {
         for(int i = N - 1; i >= 0; --i) {
             if(x >> i & 1) {

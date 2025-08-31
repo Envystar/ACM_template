@@ -29,8 +29,8 @@ struct BitRank {
         return rank1(j) - rank1(i);
     }
     // [0, i) 0的个数
-    unsigned int rank0(const unsigned int i) const { 
-        return i - rank1(i); 
+    unsigned int rank0(const unsigned int i) const {
+        return i - rank1(i);
     }
     // [i, j) 0的个数
     unsigned int rank0(const unsigned int i, const unsigned int j) const {
@@ -64,8 +64,8 @@ public:
         }
     }
 
-    int get(const int val, const int i) { 
-        return (val >> i) & 1; 
+    int get(const int val, const int i) {
+        return (val >> i) & 1;
     }
 
     // [l, r] 中val出现的频率

@@ -13,7 +13,7 @@ struct SegmentTree {
     SegmentTree(T n) : L(0), R(n - 1) {}
     SegmentTree(T L, T R) : L(L), R(R) {}
     void pushup(Node* id) {
-        id->info = (id->l == nullptr ? Info() : id->l->info) 
+        id->info = (id->l == nullptr ? Info() : id->l->info)
                  + (id->r == nullptr ? Info() : id->r->info);
     }
     void update(T pos, const Info &val) {
@@ -45,10 +45,10 @@ struct SegmentTree {
             return id->info;
         }
         T mid = (l + r - 1) / 2;
-        return rangeQuery(id->l, l, mid, x, y) 
+        return rangeQuery(id->l, l, mid, x, y)
              + rangeQuery(id->r, mid + 1, r, x, y);
     }
-    
+
     void merge(SegmentTree<Info, T> seg) {
         root = merge(root, seg.root, L, R);
     }
