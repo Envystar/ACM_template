@@ -12,13 +12,9 @@ struct Comb {
     i64 fac(int x) { return _fac[x]; }
     i64 invfac(int x) { return _invfac[x]; }
     i64 inv(int x) { return _inv[x]; }
-    i64 C(int n, int m) {
+    i64 operator()(int n, int m) {
         if(n < m || n < 0 || m < 0) return 0;
         return _fac[n] * _invfac[m] % P * _invfac[n - m] % P;
-    }
-    i64 A(int n, int m) {
-        if(n < m || n < 0 || m < 0) return 0;
-        return _fac[n] * _invfac[n - m] % P;
     }
     std::vector<i64> _fac, _inv, _invfac; //阶乘，i的逆元，阶乘的逆元
 } comb(MAXN);
