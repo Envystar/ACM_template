@@ -129,11 +129,6 @@ long double dis(const Point<T> &a, const Point<T> &b) { //点a到点b距离
 }
 
 template<typename T>
-long double angle(const Vector<T> &a, const Vector<T> &b) { //向量a和向量b的夹角弧度
-    return acosl(dot(a, b) / len(a) / len(b));
-}
-
-template<typename T>
 Vector<T> rotate(const Vector <T> &a) { //向量a逆时针旋转pi/2
     return {-a.y, a.x};
 }
@@ -159,7 +154,7 @@ bool intersect(const Seg<T> &a, const Seg<T> &b) { //线段a和线段b不严格�
 
 template<typename T>
 bool intersectStrictly(const Seg<T> &a, const Seg<T> &b) { //线段a和线段b严格相交，不包含端点相交
-    return sgn(cross(a.s, a.t, b.s) * cross(a.s, a.t, b.t)) < 0 
+    return sgn(cross(a.s, a.t, b.s) * cross(a.s, a.t, b.t)) < 0
         && sgn(cross(b.s, b.t, a.s) * cross(b.s, b.t, a.t)) < 0;
 }
 
@@ -256,19 +251,19 @@ std::vector<Line<T>> halfcut(std::vector<Line<T>> lines) { //半平面交，默�
     std::vector<Line<T>> ls(lines.size());
     for(const auto &line : lines) {
         if(r >= l && sgn(cross(line.t - line.s, ls[r].t - ls[r].s)) == 0) continue;
-        while(r > l && sgn(cross(line.s, line.t, intersection(ls[r], ls[r - 1]))) == -1) r--;
-        while(r > l && sgn(cross(line.s, line.t, intersection(ls[l], ls[l + 1]))) == -1) l++;
+        while(r > l && sgn(cross(line.s, line.t, getNode(ls[r], ls[r - 1]))) == -1) r--;
+        while(r > l && sgn(cross(line.s, line.t, getNode(ls[l], ls[l + 1]))) == -1) l++;
         ls[++r] = line;
     }
-    while(r > l + 1 && sgn(cross(ls[l].s, ls[l].t, intersection(ls[r], ls[r - 1]))) == -1) r--;
+    while(r > l + 1 && sgn(cross(ls[l].s, ls[l].t, getNode(ls[r], ls[r - 1]))) == -1) r--;
     return std::vector<Line<T>>(ls.begin() + l, ls.begin() + r + 1);
 }
 
 template<typename T>
 std::vector<Point<T>> linesToPoints(const std::vector<Line<T>> &lines) { //直线式凸包转为点凸包
-    std::vector<Point<T>> v; 
+    std::vector<Point<T>> v;
     for(int i = 0; i < lines.size(); ++i) {
-        v.push_back(intersection(lines[i], lines[(i + 1) % lines.size()]));
+        v.push_back(getNode(lines[i], lines[(i + 1) % lines.size()]));
     }
     return v;
 };
@@ -332,7 +327,7 @@ long double grith(const std::vector<Point<T>> &v) { //求凸包周长
 }
 
 void solve() {
-    
+
 }
 
 int main() {
