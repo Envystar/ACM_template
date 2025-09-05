@@ -5,17 +5,14 @@ template<typename T>
 struct Fenwick {
     Fenwick(int n) : vec(n + 1), add(n + 1) {}
     void rangeUpdate(int l, int r, T dx) {
-        update(l, dx);
-        update(r + 1, -dx);
+        updatedx(l, dx);
+        updatedx(r + 1, -dx);
+    }
+    void update(int pos, T dx) {
+        rangeUpdate(pos, pos, dx);
     }
     T rangeQuery(int l, int r) {
         return query(r) - query(l - 1);
-    }
-    void update(int pos, T dx) {
-        for(int i = pos; i < vec.size(); i += (i & -i)) {
-            vec[i] += dx;
-            add[i] += (pos - 1) * dx;
-        }
     }
     T query(int pos) {
         T res{};
@@ -23,6 +20,12 @@ struct Fenwick {
             res += pos * vec[i] - add[i];
         }
         return res;
+    }
+    void updatedx(int pos, T dx) {
+        for(int i = pos; i < vec.size(); i += (i & -i)) {
+            vec[i] += dx;
+            add[i] += (pos - 1) * dx;
+        }
     }
     std::vector<T> vec, add;
 };
